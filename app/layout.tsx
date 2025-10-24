@@ -1,0 +1,95 @@
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import ScrollToTop from '@/components/ScrollToTop';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'ThinkScope - Stay Updated with Latest News',
+  description: 'Your trusted source for breaking news, technology updates, world affairs, education, lifestyle, and sports. Stay informed with our comprehensive coverage.',
+  keywords: 'news, technology, world affairs, education, lifestyle, sports, breaking news, current events',
+  authors: [{ name: 'ThinkScope Team' }],
+  creator: 'ThinkScope',
+  publisher: 'ThinkScope',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://thinkscope.com'),
+  openGraph: {
+    title: 'ThinkScope - Stay Updated with Latest News',
+    description: 'Your trusted source for breaking news, technology updates, world affairs, education, lifestyle, and sports.',
+    url: 'https://thinkscope.com',
+    siteName: 'ThinkScope',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'ThinkScope - Latest News and Updates',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ThinkScope - Stay Updated with Latest News',
+    description: 'Your trusted source for breaking news, technology updates, world affairs, education, lifestyle, and sports.',
+    images: ['/og-image.jpg'],
+    creator: '@thinkscope',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-site-verification-code',
+  },
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'ThinkScope',
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className="dark">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="canonical" href="https://thinkscope.com" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#00ff88" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="ThinkScope" />
+      </head>
+      <body className={`${inter.className} bg-primary-900 text-white antialiased`}>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+        <ScrollToTop />
+      </body>
+    </html>
+  );
+}

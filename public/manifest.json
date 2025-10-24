@@ -1,0 +1,28 @@
+{
+  "name": "ThinkScope - Latest News and Updates",
+  "short_name": "ThinkScope",
+  "description": "Your trusted source for breaking news, technology updates, world affairs, education, lifestyle, and sports.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#00ff88",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["news", "information"],
+  "lang": "en-US",
+  "scope": "/",
+  "prefer_related_applications": false
+}

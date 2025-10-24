@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://thinkscope.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Disallow certain paths if needed
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
