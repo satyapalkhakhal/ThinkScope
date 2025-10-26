@@ -83,6 +83,18 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="ThinkScope" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2757390342181644" crossOrigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBZK7E1G01"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XBZK7E1G01');
+            `,
+          }}
+        />
       </head>
       <body className={`${inter.className} bg-primary-900 text-white antialiased`}>
         <Header />

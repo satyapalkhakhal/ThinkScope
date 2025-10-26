@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
 import { ArrowLeft, Clock, Calendar, User, Share2, Bookmark, Facebook, Twitter, Linkedin, ChevronRight } from 'lucide-react';
 import BlogGrid from '@/components/BlogGrid';
 import { categories } from '@/data/categories';
@@ -17,6 +18,9 @@ interface Article {
   category: string;
   slug: string;
   categoryId?: string;
+  author?: string;
+  authorTitle?: string;
+  content?: string;
 }
 
 interface BlogPostProps {
@@ -102,7 +106,7 @@ export default function BlogPost({ article }: BlogPostProps) {
               </div>
               <div className="flex items-center space-x-1">
                 <User className="h-4 w-4" />
-                <span className="text-sm">ThinkScope Team</span>
+                <span className="text-sm">{article.author || 'ThinkScope Team'}</span>
               </div>
             </div>
 
@@ -164,53 +168,63 @@ export default function BlogPost({ article }: BlogPostProps) {
           />
         </div>
 
+        {/* Author Info */}
+        {(article.author || article.authorTitle) && (
+          <div className="mb-8 p-4 bg-primary-800/50 rounded-lg border border-gray-700">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-accent-500/20 rounded-full flex items-center justify-center">
+                <User className="h-6 w-6 text-accent-500" />
+              </div>
+              <div>
+                <p className="font-semibold text-white">{article.author}</p>
+                {article.authorTitle && (
+                  <p className="text-sm text-gray-400">{article.authorTitle}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Article Content */}
         <div className="prose prose-lg prose-invert max-w-none mb-12">
-          <p className="text-xl text-gray-300 leading-relaxed mb-6">
-            {article.excerpt}
-          </p>
-
-          {/* Article body content - expanded version */}
-          <div className="space-y-6 text-gray-300 leading-relaxed">
-            <p>
-              In today's rapidly evolving digital landscape, staying informed about the latest developments
-              across various sectors has become more crucial than ever. This comprehensive article explores
-              the key aspects and implications of recent advancements in {article.category.toLowerCase()},
-              providing readers with valuable insights and analysis.
-            </p>
-
-            <h2 className="text-2xl font-bold text-accent-500 mt-8 mb-4">Understanding the Impact</h2>
-
-            <p>
-              The developments we're witnessing today represent a significant shift in how we approach
-              modern challenges. From technological innovations to global policy changes, each advancement
-              carries profound implications for individuals, businesses, and society as a whole.
-            </p>
-
-            <blockquote className="border-l-4 border-accent-500 pl-6 py-2 my-6 bg-primary-800/50 rounded-r-lg">
-              <p className="text-gray-300 italic">
-                "The future belongs to those who believe in the beauty of their dreams and work
-                tirelessly to turn them into reality."
+          {article.content ? (
+            <div className="article-content text-gray-300 leading-relaxed">
+              <ReactMarkdown
+                components={{
+                  h2: ({node, ...props}) => <h2 className="text-2xl font-bold text-accent-500 mt-8 mb-4" {...props} />,
+                  h3: ({node, ...props}) => <h3 className="text-xl font-semibold text-accent-400 mt-6 mb-3" {...props} />,
+                  p: ({node, ...props}) => <p className="mb-4 text-gray-300" {...props} />,
+                  ul: ({node, ...props}) => <ul className="list-disc list-inside space-y-2 mb-4 text-gray-300" {...props} />,
+                  ol: ({node, ...props}) => <ol className="list-decimal list-inside space-y-2 mb-4 text-gray-300" {...props} />,
+                  li: ({node, ...props}) => <li className="text-gray-300" {...props} />,
+                  blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-accent-500 pl-6 py-2 my-6 bg-primary-800/50 rounded-r-lg italic text-gray-300" {...props} />,
+                  strong: ({node, ...props}) => <strong className="font-semibold text-white" {...props} />,
+                  code: ({node, ...props}) => <code className="bg-primary-800 px-2 py-1 rounded text-accent-400" {...props} />,
+                }}
+              >
+                {article.content}
+              </ReactMarkdown>
+            </div>
+          ) : (
+            <>
+              <p className="text-xl text-gray-300 leading-relaxed mb-6">
+                {article.excerpt}
               </p>
-              <cite className="text-accent-500 text-sm mt-2 block">- Eleanor Roosevelt</cite>
-            </blockquote>
-
-            <h2 className="text-2xl font-bold text-accent-500 mt-8 mb-4">Key Takeaways</h2>
-
-            <ul className="list-disc list-inside space-y-2 text-gray-300">
-              <li>Comprehensive understanding of current trends and their implications</li>
-              <li>Expert analysis of potential future developments</li>
-              <li>Practical insights for staying ahead in a rapidly changing world</li>
-              <li>Strategic considerations for individuals and organizations</li>
-            </ul>
-
-            <p>
-              As we continue to navigate through these transformative times, it's essential to maintain
-              a balanced perspective while embracing the opportunities that lie ahead. The information
-              presented here serves as a foundation for making informed decisions and staying prepared
-              for future challenges and opportunities.
-            </p>
-          </div>
+              <div className="space-y-6 text-gray-300 leading-relaxed">
+                <p>
+                  In today's rapidly evolving digital landscape, staying informed about the latest developments
+                  across various sectors has become more crucial than ever. This comprehensive article explores
+                  the key aspects and implications of recent advancements in {article.category.toLowerCase()},
+                  providing readers with valuable insights and analysis.
+                </p>
+                <h2 className="text-2xl font-bold text-accent-500 mt-8 mb-4">Key Insights</h2>
+                <p>
+                  As we continue to navigate through these transformative times, it's essential to maintain
+                  a balanced perspective while embracing the opportunities that lie ahead.
+                </p>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Article Footer */}
