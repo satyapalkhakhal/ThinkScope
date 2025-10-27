@@ -6,7 +6,6 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import { ArrowLeft, Clock, Calendar, User, Share2, Bookmark, Facebook, Twitter, Linkedin, ChevronRight } from 'lucide-react';
 import BlogGrid from '@/components/BlogGrid';
-import { categories } from '@/data/categories';
 
 interface Article {
   id: number;
@@ -25,16 +24,11 @@ interface Article {
 
 interface BlogPostProps {
   article: Article;
+  relatedArticles?: Article[];
 }
 
-export default function BlogPost({ article }: BlogPostProps) {
+export default function BlogPost({ article, relatedArticles = [] }: BlogPostProps) {
   const [isBookmarked, setIsBookmarked] = useState(false);
-
-  // Get related articles (same category, excluding current article)
-  const relatedArticles = categories
-    .find(cat => cat.id === article.categoryId)?.articles
-    .filter(a => a.id !== article.id)
-    .slice(0, 3) || [];
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
@@ -275,7 +269,7 @@ export default function BlogPost({ article }: BlogPostProps) {
         </footer>
 
         {/* Related Articles */}
-        {relatedArticles.length > 0 && (
+        {relatedArticles && relatedArticles.length > 0 && (
           <section className="border-t border-gray-700 pt-12">
             <h2 className="text-2xl font-bold mb-8 text-center">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

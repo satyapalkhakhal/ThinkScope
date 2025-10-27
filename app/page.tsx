@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import CategoryCarousel from '@/components/CategoryCarousel';
-import { categories } from '@/data/categories';
+import { categoryService, articleService } from '@/lib/services';
 
 export const metadata: Metadata = {
   title: 'Home | ThinkScope - Latest News and Updates',
@@ -13,12 +13,48 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch categories from Supabase
+  const { data: categories, error } = await categoryService.getAll();
+
+  if (error || !categories) {
+    console.error('Error fetching categories:', error);
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <p className="text-red-500">Error loading categories. Please try again later.</p>
+      </div>
+    );
+  }
+
+  // Fetch articles for each category
+  const categoriesWithArticles = await Promise.all(
+    categories.map(async (category) => {
+      const { data: articles } = await articleService.getByCategory(category.id, 10);
+      
+      return {
+        id: category.slug,
+        name: category.name,
+        icon: category.icon || 'Folder',
+        description: category.description || '',
+        articles: (articles || []).map(article => ({
+          id: article.id,
+          title: article.title,
+          excerpt: article.excerpt,
+          image: article.featured_image_url,
+          date: article.published_at.split('T')[0],
+          readTime: article.read_time,
+          category: category.name,
+          slug: article.slug,
+        })),
+      };
+    })
+  );
+
   return (
     <>
       <Hero />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {categories.map((category, index) => (
+        {categoriesWithArticles.map((category, index) => (
           <CategoryCarousel
             key={category.id}
             category={category}

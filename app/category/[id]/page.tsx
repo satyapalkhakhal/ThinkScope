@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import CategoryPage from '@/components/CategoryPage';
-import { categories } from '@/data/categories';
+import { categoryService, articleService } from '@/lib/services';
 
 interface CategoryPageProps {
   params: {
@@ -12,46 +12,88 @@ interface CategoryPageProps {
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { id } = params;
 
-  // Find the category
-  const category = categories.find(cat => cat.id === id);
+  // Fetch category from Supabase by slug
+  const { data, error } = await categoryService.getBySlug(id);
+  const category = data?.[0];
 
-  if (!category) {
+  if (!category || error) {
     return {
-      title: 'Category Not Found | NewsBlog',
+      title: 'Category Not Found | ThinkScope',
     };
   }
 
   return {
-    title: `${category.name} | NewsBlog - Latest ${category.name} News`,
-    description: `Stay updated with the latest ${category.name.toLowerCase()} news, articles, and insights. ${category.description}`,
+    title: `${category.name} | ThinkScope - Latest ${category.name} News`,
+    description: `Stay updated with the latest ${category.name.toLowerCase()} news, articles, and insights. ${category.description || ''}`,
     openGraph: {
-      title: `${category.name} | NewsBlog - Latest ${category.name} News`,
+      title: `${category.name} | ThinkScope - Latest ${category.name} News`,
       description: `Stay updated with the latest ${category.name.toLowerCase()} news, articles, and insights.`,
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${category.name} | NewsBlog - Latest ${category.name} News`,
+      title: `${category.name} | ThinkScope - Latest ${category.name} News`,
       description: `Stay updated with the latest ${category.name.toLowerCase()} news, articles, and insights.`,
     },
   };
 }
 
 export async function generateStaticParams() {
-  return categories.map((category) => ({
-    id: category.id,
+  // Fetch all active categories from Supabase
+  const { data: categories } = await categoryService.getAll();
+  
+  return (categories || []).map((category) => ({
+    id: category.slug,
   }));
 }
 
-export default function Category({ params }: CategoryPageProps) {
+export default async function Category({ params }: CategoryPageProps) {
   const { id } = params;
 
-  // Find the category
-  const category = categories.find(cat => cat.id === id);
+  // Fetch category from Supabase by slug
+  const { data: categoryData, error: categoryError } = await categoryService.getBySlug(id);
+  const category = categoryData?.[0];
 
-  if (!category) {
+  if (!category || categoryError) {
     notFound();
   }
 
-  return <CategoryPage category={category} />;
+  // Fetch articles for this category (ordered by id desc, limit 20)
+  const { data: articles, error: articlesError } = await articleService.getAll({
+    filters: { 
+      categoryId: category.id,
+      status: 'published'
+    },
+    sort: {
+      sortBy: 'id',
+      sortOrder: 'desc'
+    },
+    pagination: {
+      limit: 20
+    }
+  });
+
+  if (articlesError) {
+    console.error('Error fetching articles:', articlesError);
+  }
+
+  // Transform data for CategoryPage component
+  const transformedCategory = {
+    id: category.slug,
+    name: category.name,
+    icon: category.icon || 'Folder',
+    description: category.description || '',
+    articles: (articles || []).map(article => ({
+      id: article.id,
+      title: article.title,
+      excerpt: article.excerpt,
+      image: article.featured_image_url,
+      date: article.published_at.split('T')[0],
+      readTime: article.read_time,
+      category: category.name,
+      slug: article.slug,
+    })),
+  };
+
+  return <CategoryPage category={transformedCategory} />;
 }

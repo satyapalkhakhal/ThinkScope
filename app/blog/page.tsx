@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import BlogGrid from '@/components/BlogGrid';
-import { categories } from '@/data/categories';
+import { articleService, categoryService } from '@/lib/services';
 
 export const metadata: Metadata = {
   title: 'Blog | ThinkScope - Latest Articles and Insights',
@@ -14,15 +14,47 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
-  // Flatten all articles from categories
-  const allArticles = categories.flatMap(category =>
-    category.articles.map(article => ({
-      ...article,
-      category: category.name,
-      categoryId: category.id,
-    }))
-  ).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+export default async function BlogPage() {
+  // Fetch all published articles from Supabase
+  const { data: articles, error: articlesError } = await articleService.getAll({
+    filters: { status: 'published' },
+    sort: { sortBy: 'published_at', sortOrder: 'desc' },
+    pagination: { limit: 100 },
+  });
+
+  // Fetch all categories for the filter buttons
+  const { data: categories, error: categoriesError } = await categoryService.getAll();
+
+  if (articlesError || !articles) {
+    return (
+      <div className="min-h-screen pt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <p className="text-red-500 text-center">Error loading articles. Please try again later.</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Create a map of category IDs to names
+  const categoryMap = new Map(
+    (categories || []).map(cat => [cat.id, { name: cat.name, slug: cat.slug }])
+  );
+
+  // Transform articles for BlogGrid component
+  const allArticles = articles.map(article => {
+    const category = categoryMap.get(article.category_id);
+    return {
+      id: article.id,
+      title: article.title,
+      excerpt: article.excerpt,
+      image: article.featured_image_url,
+      date: article.published_at.split('T')[0],
+      readTime: article.read_time,
+      category: category?.name || 'Uncategorized',
+      categoryId: category?.slug || '',
+      slug: article.slug,
+    };
+  });
 
   return (
     <div className="min-h-screen pt-16">

@@ -3,16 +3,15 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, Newspaper } from 'lucide-react';
+import { categoryService, Category } from '@/lib/services';
 
-const navigation = [
+// Static navigation items (non-category pages)
+const staticNavigation = [
   { name: 'Home', href: '/' },
   { name: 'Categories', href: '/categories' },
-  { name: 'Technology', href: '/category/technology' },
-  { name: 'News', href: '/category/news' },
-  { name: 'World Affairs', href: '/category/world-affairs' },
-  { name: 'Education', href: '/category/education' },
-  { name: 'Lifestyle', href: '/category/lifestyle' },
-  { name: 'Sports', href: '/category/sports' },
+];
+
+const staticEndNavigation = [
   { name: 'Blog', href: '/blog' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
@@ -21,6 +20,25 @@ const navigation = [
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Load categories from API
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const { data, error } = await categoryService.getAll();
+        if (data && !error) {
+          setCategories(data);
+        }
+      } catch (error) {
+        console.error('Error loading categories for navbar:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadCategories();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +50,16 @@ export default function Header() {
   }, []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Build complete navigation array
+  const navigation = [
+    ...staticNavigation,
+    ...categories.map(cat => ({
+      name: cat.name,
+      href: `/category/${cat.slug}`,
+    })),
+    ...staticEndNavigation,
+  ];
 
   return (
     <header

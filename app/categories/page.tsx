@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Clock, Calendar, ChevronRight } from 'lucide-react';
-import { categories } from '@/data/categories';
+import { categoryService, articleService } from '@/lib/services';
 
 export const metadata: Metadata = {
   title: 'Categories | ThinkScope - Explore All News Categories',
@@ -14,15 +14,50 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CategoriesPage() {
-  const iconMap: { [key: string]: string } = {
-    Laptop: '💻',
-    Newspaper: '📰',
-    Globe: '🌍',
-    GraduationCap: '🎓',
-    Heart: '❤️',
-    Trophy: '🏆',
-  };
+const iconMap: { [key: string]: string } = {
+  Laptop: '💻',
+  Newspaper: '📰',
+  Globe: '🌍',
+  GraduationCap: '🎓',
+  Heart: '❤️',
+  Trophy: '🏆',
+};
+
+export default async function CategoriesPage() {
+  // Fetch all active categories from Supabase
+  const { data: categories, error } = await categoryService.getAll();
+
+  if (error || !categories) {
+    return (
+      <div className="min-h-screen pt-16 bg-primary-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <p className="text-red-500 text-center">Error loading categories. Please try again later.</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Fetch latest article for each category
+  const categoriesWithArticles = await Promise.all(
+    categories.map(async (category) => {
+      const { data: articles } = await articleService.getByCategory(category.id, 1);
+      const { data: allArticles } = await articleService.getByCategory(category.id, 100);
+      
+      return {
+        id: category.slug,
+        name: category.name,
+        icon: category.icon || 'Folder',
+        description: category.description || '',
+        totalArticles: allArticles?.length || 0,
+        latestArticle: articles?.[0] ? {
+          title: articles[0].title,
+          image: articles[0].featured_image_url,
+          date: articles[0].published_at.split('T')[0],
+          readTime: articles[0].read_time,
+        } : null,
+      };
+    })
+  );
 
   return (
     <div className="min-h-screen pt-16 bg-primary-900">
@@ -48,7 +83,7 @@ export default function CategoriesPage() {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          {categories.map((category, index) => (
+          {categoriesWithArticles.map((category, index) => (
             <CategoryCard
               key={category.id}
               category={category}
@@ -83,14 +118,26 @@ export default function CategoriesPage() {
 }
 
 interface CategoryCardProps {
-  category: typeof categories[0];
+  category: {
+    id: string;
+    name: string;
+    icon: string;
+    description: string;
+    totalArticles: number;
+    latestArticle: {
+      title: string;
+      image: string;
+      date: string;
+      readTime: string;
+    } | null;
+  };
   index: number;
   iconMap: { [key: string]: string };
 }
 
 function CategoryCard({ category, index, iconMap }: CategoryCardProps) {
-  const latestArticle = category.articles[0];
-  const totalArticles = category.articles.length;
+  const latestArticle = category.latestArticle;
+  const totalArticles = category.totalArticles;
 
   return (
     <Link href={`/category/${category.id}`}>
