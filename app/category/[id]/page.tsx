@@ -9,6 +9,9 @@ interface CategoryPageProps {
   };
 }
 
+// Enable ISR - revalidate every 30 minutes
+export const revalidate = 1800;
+
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { id } = params;
 

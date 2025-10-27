@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   },
 };
 
+// Enable ISR - revalidate every 30 minutes
+export const revalidate = 1800;
+
 export default async function BlogPage() {
   // Fetch all published articles from Supabase
   const { data: articles, error: articlesError } = await articleService.getAll({

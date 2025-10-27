@@ -9,6 +9,9 @@ interface BlogPostPageProps {
   };
 }
 
+// Enable ISR - revalidate every 2 hours
+export const revalidate = 7200;
+
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = params;
 

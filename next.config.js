@@ -20,8 +20,33 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        // Cache static assets (images, fonts, etc.)
+        source: '/(.*)\\.(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot)$',
         headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Cache CSS and JS files
+        source: '/(.*)\\.(css|js)$',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Cache HTML pages with revalidation
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=3600, stale-while-revalidate=86400',
+          },
           {
             key: 'X-Frame-Options',
             value: 'DENY',
