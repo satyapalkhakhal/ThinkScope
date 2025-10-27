@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Terms of Service | ThinkScope - User Agreement',
   description: 'ThinkScope Terms of Service: Read our user agreement, terms of use, and conditions for accessing our news platform and services.',
+  keywords: 'terms of service, user agreement, terms and conditions, legal terms, acceptable use policy, user rights, service terms',
   openGraph: {
     title: 'Terms of Service | ThinkScope - User Agreement',
     description: 'ThinkScope Terms of Service: Read our user agreement, terms of use, and conditions for accessing our news platform.',

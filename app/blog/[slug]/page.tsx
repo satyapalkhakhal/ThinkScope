@@ -25,9 +25,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
+  // Generate keywords from title and category
+  const titleWords = article.title.split(' ').filter(word => word.length > 3).slice(0, 5).join(', ');
+  const keywords = `${titleWords}, ${article.title}, ThinkScope, news, article`;
+
   return {
     title: `${article.title} | ThinkScope`,
     description: article.excerpt,
+    keywords: keywords,
     openGraph: {
       title: `${article.title} | ThinkScope`,
       description: article.excerpt,

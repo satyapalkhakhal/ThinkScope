@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Contact Us | ThinkScope - Get in Touch',
   description: 'Contact ThinkScope for inquiries, feedback, story tips, or business partnerships. Reach out to our editorial team, advertising department, or technical support.',
+  keywords: 'contact ThinkScope, get in touch, story tips, business inquiries, editorial team, advertising, feedback, news tips',
   openGraph: {
     title: 'Contact Us | ThinkScope - Get in Touch',
     description: 'Contact ThinkScope for inquiries, feedback, story tips, or business partnerships.',

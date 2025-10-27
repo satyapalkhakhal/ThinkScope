@@ -6,6 +6,7 @@ import { categoryService, articleService } from '@/lib/services';
 export const metadata: Metadata = {
   title: 'Home | ThinkScope - Latest News and Updates',
   description: 'Stay updated with the latest news across technology, world affairs, education, lifestyle, and sports. Your trusted source for breaking news and current events.',
+  keywords: 'news, latest news, breaking news, technology, world affairs, education, lifestyle, sports, current events, ThinkScope',
   openGraph: {
     title: 'ThinkScope - Stay Updated with Latest News',
     description: 'Your trusted source for breaking news, technology updates, world affairs, education, lifestyle, and sports.',

@@ -7,6 +7,7 @@ import { categoryService, articleService } from '@/lib/services';
 export const metadata: Metadata = {
   title: 'Categories | ThinkScope - Explore All News Categories',
   description: 'Browse all news categories including Technology, Breaking News, World Affairs, Education, Lifestyle, and Sports. Find articles and updates in your area of interest.',
+  keywords: 'news categories, technology, breaking news, world affairs, education, lifestyle, sports, browse categories, news topics',
   openGraph: {
     title: 'Categories | ThinkScope - Explore All News Categories',
     description: 'Browse all news categories including Technology, Breaking News, World Affairs, Education, Lifestyle, and Sports.',

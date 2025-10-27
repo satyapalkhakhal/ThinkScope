@@ -25,9 +25,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     };
   }
 
+  // Generate keywords for category
+  const keywords = `${category.name}, ${category.name.toLowerCase()} news, ThinkScope, latest ${category.name.toLowerCase()}, ${category.name.toLowerCase()} articles, breaking news`;
+
   return {
     title: `${category.name} | ThinkScope - Latest ${category.name} News`,
     description: `Stay updated with the latest ${category.name.toLowerCase()} news, articles, and insights. ${category.description || ''}`,
+    keywords: keywords,
     openGraph: {
       title: `${category.name} | ThinkScope - Latest ${category.name} News`,
       description: `Stay updated with the latest ${category.name.toLowerCase()} news, articles, and insights.`,

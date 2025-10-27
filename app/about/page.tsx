@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'About Us | ThinkScope - Your Trusted News Source',
   description: 'Learn about ThinkScope, your trusted source for breaking news, technology updates, world affairs, education, lifestyle, and sports coverage. Our mission, values, and commitment to quality journalism.',
+  keywords: 'about ThinkScope, news source, journalism, editorial team, news mission, news values, quality journalism, trusted news',
   openGraph: {
     title: 'About Us | ThinkScope - Your Trusted News Source',
     description: 'Learn about ThinkScope, your trusted source for breaking news, technology updates, world affairs, education, lifestyle, and sports coverage.',

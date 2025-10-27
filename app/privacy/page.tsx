@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Privacy Policy | ThinkScope - Your Data Protection',
   description: 'ThinkScope Privacy Policy: Learn how we collect, use, and protect your personal information. Our commitment to data privacy and user rights.',
+  keywords: 'privacy policy, data protection, personal information, user privacy, data security, GDPR, privacy rights, data collection',
   openGraph: {
     title: 'Privacy Policy | ThinkScope - Your Data Protection',
     description: 'ThinkScope Privacy Policy: Learn how we collect, use, and protect your personal information.',
