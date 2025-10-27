@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { ArrowLeft, Clock, Calendar, User, Share2, Bookmark, Facebook, Twitter, Linkedin, ChevronRight } from 'lucide-react';
 import BlogGrid from '@/components/BlogGrid';
 
@@ -184,6 +185,7 @@ export default function BlogPost({ article, relatedArticles = [] }: BlogPostProp
           {article.content ? (
             <div className="article-content text-gray-300 leading-relaxed">
               <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
                 components={{
                   h2: ({node, ...props}) => <h2 className="text-2xl font-bold text-accent-500 mt-8 mb-4" {...props} />,
                   h3: ({node, ...props}) => <h3 className="text-xl font-semibold text-accent-400 mt-6 mb-3" {...props} />,
@@ -194,6 +196,16 @@ export default function BlogPost({ article, relatedArticles = [] }: BlogPostProp
                   blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-accent-500 pl-6 py-2 my-6 bg-primary-800/50 rounded-r-lg italic text-gray-300" {...props} />,
                   strong: ({node, ...props}) => <strong className="font-semibold text-white" {...props} />,
                   code: ({node, ...props}) => <code className="bg-primary-800 px-2 py-1 rounded text-accent-400" {...props} />,
+                  table: ({node, ...props}) => (
+                    <div className="overflow-x-auto my-6">
+                      <table className="min-w-full border-collapse border border-gray-700 rounded-lg" {...props} />
+                    </div>
+                  ),
+                  thead: ({node, ...props}) => <thead className="bg-primary-800" {...props} />,
+                  tbody: ({node, ...props}) => <tbody className="divide-y divide-gray-700" {...props} />,
+                  tr: ({node, ...props}) => <tr className="hover:bg-primary-800/50 transition-colors" {...props} />,
+                  th: ({node, ...props}) => <th className="border border-gray-700 px-4 py-3 text-left text-sm font-semibold text-accent-500" {...props} />,
+                  td: ({node, ...props}) => <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300" {...props} />,
                 }}
               >
                 {article.content}
