@@ -1,11 +1,12 @@
 import { MetadataRoute } from 'next';
-import { categories } from '@/data/categories';
+import { articleService } from '@/lib/services/article.service';
+import { categoryService } from '@/lib/services/category.service';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://thinkscope.com';
 
   // Static pages
-  const staticPages = [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -50,23 +51,40 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Category pages
-  const categoryPages = categories.map((category) => ({
-    url: `${baseUrl}/category/${category.id}`,
-    lastModified: new Date(),
-    changeFrequency: 'daily' as const,
-    priority: 0.8,
-  }));
+  try {
+    // Fetch all published articles from Supabase
+    const articlesResponse = await articleService.getAll({
+      filters: { status: 'published' },
+      pagination: { limit: 10000 }, // Get all articles
+      sort: { sortBy: 'published_at', sortOrder: 'desc' },
+    });
 
-  // Blog post pages
-  const blogPosts = categories.flatMap((category) =>
-    category.articles.map((article) => ({
+    // Fetch all active categories from Supabase
+    const categoriesResponse = await categoryService.getAll();
+
+    const articles = articlesResponse.data || [];
+    const categories = categoriesResponse.data || [];
+
+    // Category pages
+    const categoryPages: MetadataRoute.Sitemap = categories.map((category) => ({
+      url: `${baseUrl}/category/${category.slug || category.id}`,
+      lastModified: new Date(category.updated_at || new Date()),
+      changeFrequency: 'daily' as const,
+      priority: 0.8,
+    }));
+
+    // Blog post pages
+    const blogPosts: MetadataRoute.Sitemap = articles.map((article) => ({
       url: `${baseUrl}/blog/${article.slug}`,
-      lastModified: new Date(article.date),
+      lastModified: new Date(article.updated_at || article.published_at || article.created_at),
       changeFrequency: 'weekly' as const,
       priority: 0.6,
-    }))
-  );
+    }));
 
-  return [...staticPages, ...categoryPages, ...blogPosts];
+    return [...staticPages, ...categoryPages, ...blogPosts];
+  } catch (error) {
+    console.error('Error generating sitemap:', error);
+    // Return static pages only if database fetch fails
+    return staticPages;
+  }
 }
