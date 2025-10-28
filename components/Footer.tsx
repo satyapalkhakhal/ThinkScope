@@ -1,34 +1,19 @@
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
-import { categories } from '@/data/categories';
+import { Mail } from 'lucide-react';
+import { categoryService } from '@/lib/services';
 
 const footerLinks = {
-  categories: [
-    { name: 'All Categories', href: '/categories' },
-    ...categories.map(cat => ({ name: cat.name, href: `/category/${cat.id}` }))
-  ],
   company: [
     { name: 'About Us', href: '/about' },
     { name: 'Contact', href: '/contact' },
     { name: 'Privacy Policy', href: '/privacy' },
     { name: 'Terms of Service', href: '/terms' },
   ],
-  support: [
-    { name: 'Help Center', href: '/help' },
-    { name: 'RSS Feeds', href: '/rss' },
-    { name: 'Newsletter', href: '/newsletter' },
-    { name: 'Advertise', href: '/advertise' },
-  ],
 };
 
-const socialLinks = [
-  { name: 'Facebook', href: '#', icon: Facebook },
-  { name: 'Twitter', href: '#', icon: Twitter },
-  { name: 'Instagram', href: '#', icon: Instagram },
-  { name: 'YouTube', href: '#', icon: Youtube },
-];
-
-export default function Footer() {
+export default async function Footer() {
+  // Fetch categories from Supabase
+  const { data: categories } = await categoryService.getAll();
   return (
     <footer className="bg-primary-800 border-t border-gray-700 mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -43,28 +28,24 @@ export default function Footer() {
               Your trusted source for news and information across multiple categories.
               Stay informed with our comprehensive coverage of current events.
             </p>
-            <div className="flex space-x-3">
-              {socialLinks.map((social) => (
-                <Link
-                  key={social.name}
-                  href={social.href}
-                  className="w-10 h-10 bg-primary-900 border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:text-accent-500 hover:border-accent-500 transition-all duration-300 hover:-translate-y-1"
-                  aria-label={social.name}
-                >
-                  <social.icon className="h-4 w-4" />
-                </Link>
-              ))}
-            </div>
           </div>
 
           {/* Categories */}
           <div>
             <h3 className="text-lg font-semibold text-accent-500 mb-4">Categories</h3>
             <ul className="space-y-2">
-              {footerLinks.categories.map((category) => (
-                <li key={category.name}>
+              <li>
+                <Link
+                  href="/categories"
+                  className="text-gray-400 hover:text-accent-500 transition-colors text-sm"
+                >
+                  All Categories
+                </Link>
+              </li>
+              {(categories || []).map((category) => (
+                <li key={category.id}>
                   <Link
-                    href={category.href}
+                    href={`/category/${category.slug || category.id}`}
                     className="text-gray-400 hover:text-accent-500 transition-colors text-sm"
                   >
                     {category.name}
@@ -97,15 +78,9 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-gray-400 text-sm">
                 <Mail className="h-4 w-4 text-accent-500 flex-shrink-0" />
-                <span>info@newsblog.com</span>
-              </div>
-              <div className="flex items-center space-x-3 text-gray-400 text-sm">
-                <Phone className="h-4 w-4 text-accent-500 flex-shrink-0" />
-                <span>+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-center space-x-3 text-gray-400 text-sm">
-                <MapPin className="h-4 w-4 text-accent-500 flex-shrink-0" />
-                <span>123 News Street, Media City</span>
+                <a href="mailto:khakhalsatyapal@gmail.com" className="hover:text-accent-500 transition-colors">
+                  khakhalsatyapal@gmail.com
+                </a>
               </div>
             </div>
           </div>

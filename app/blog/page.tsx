@@ -86,16 +86,20 @@ export default async function BlogPage() {
         {/* Category Filter */}
         <div className="mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <div className="flex flex-wrap gap-2 justify-center">
-            <button className="px-4 py-2 bg-accent-500 text-primary-900 rounded-full font-semibold text-sm hover:bg-accent-400 transition-colors">
+            <Link 
+              href="/blog"
+              className="px-4 py-2 bg-accent-500 text-primary-900 rounded-full font-semibold text-sm hover:bg-accent-400 transition-colors"
+            >
               All Articles
-            </button>
-            {categories.map((category) => (
-              <button
+            </Link>
+            {(categories || []).map((category) => (
+              <Link
                 key={category.id}
+                href={`/category/${category.slug || category.id}`}
                 className="px-4 py-2 bg-primary-800 text-gray-300 rounded-full font-semibold text-sm hover:bg-primary-700 hover:text-accent-500 transition-colors border border-gray-700"
               >
                 {category.name}
-              </button>
+              </Link>
             ))}
           </div>
         </div>

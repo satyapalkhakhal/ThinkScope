@@ -41,62 +41,8 @@ export default function ContactPage() {
                     <h3 className="font-semibold mb-1">Email Us</h3>
                     <p className="text-gray-400 text-sm mb-2">General inquiries and editorial questions</p>
                     <a href="mailto:info@newsblog.com" className="text-accent-500 hover:text-accent-400 transition-colors">
-                      info@newsblog.com
+                      khakhalsatyapal@gmail.com
                     </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-accent-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">📰</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Story Tips</h3>
-                    <p className="text-gray-400 text-sm mb-2">Have a news tip or story idea?</p>
-                    <a href="mailto:tips@newsblog.com" className="text-accent-500 hover:text-accent-400 transition-colors">
-                      tips@newsblog.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-accent-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">💼</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Business Inquiries</h3>
-                    <p className="text-gray-400 text-sm mb-2">Partnerships and advertising</p>
-                    <a href="mailto:business@newsblog.com" className="text-accent-500 hover:text-accent-400 transition-colors">
-                      business@newsblog.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-accent-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">📞</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Phone Support</h3>
-                    <p className="text-gray-400 text-sm mb-2">Monday - Friday, 9 AM - 6 PM EST</p>
-                    <a href="tel:+15551234567" className="text-accent-500 hover:text-accent-400 transition-colors">
-                      +1 (555) 123-4567
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-accent-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">📍</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Office Address</h3>
-                    <p className="text-gray-400 text-sm mb-2">Visit us at our headquarters</p>
-                    <address className="text-accent-500 not-italic">
-                      123 News Street<br />
-                      Media City, MC 12345<br />
-                      United States
-                    </address>
                   </div>
                 </div>
               </div>
