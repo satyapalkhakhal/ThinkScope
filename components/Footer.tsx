@@ -15,7 +15,7 @@ export default async function Footer() {
   // Fetch categories from Supabase
   const { data: categories } = await categoryService.getAll();
   return (
-    <footer className="bg-primary-800 border-t border-gray-700 mt-16">
+    <footer className="bg-primary-900 border-t border-primary-700 mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -87,7 +87,7 @@ export default async function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-8 pt-8 border-t border-gray-700">
+        <div className="mt-8 pt-8 border-t border-primary-700">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-500 text-sm">
               © {new Date().getFullYear()} ThinkScope. All rights reserved.

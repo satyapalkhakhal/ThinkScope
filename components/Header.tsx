@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Newspaper } from 'lucide-react';
+import { Menu, X, Search, Bell, User, ChevronRight, Newspaper } from 'lucide-react';
 import { categoryService, Category } from '@/lib/services';
 
 // Static navigation items (non-category pages)
@@ -63,11 +63,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-primary-900/95 backdrop-blur-md shadow-lg'
-          : 'bg-primary-900/90 backdrop-blur-sm'
-      }`}
+      className={`sticky top-0 z-50 bg-primary-850 shadow-md border-b border-primary-700 ${isScrolled ? 'py-2' : 'py-3'} transition-all duration-300`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -77,7 +73,7 @@ export default function Header() {
             className="flex items-center space-x-2 text-accent-500 hover:text-accent-400 transition-colors"
           >
             <Newspaper className="h-8 w-8" />
-            <span className="text-xl font-bold">ThinkScope</span>
+            <span className="font-bold text-accent-500">BREAKING:</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -97,12 +93,20 @@ export default function Header() {
           {/* Mobile menu button */}
           <button
             onClick={toggleMenu}
-            className="md:hidden p-2 rounded-md text-gray-300 hover:text-white hover:bg-primary-800 transition-colors"
+            className="md:hidden p-2 text-gray-400 hover:text-accent-500 transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
+
+        {/* Overlay */}
+        {isMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-70 z-30 md:hidden backdrop-blur-sm"
+            onClick={() => setIsMenuOpen(false)}
+          />
+        )}
 
         {/* Mobile Navigation */}
         <div

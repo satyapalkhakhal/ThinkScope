@@ -11,11 +11,11 @@
   }
 
   body {
-    @apply bg-primary-900 text-white;
+    @apply bg-primary-950 text-white;
   }
 
   * {
-    @apply border-gray-700;
+    @apply border-primary-700;
   }
 }
 
@@ -29,11 +29,11 @@
   }
 
   .card {
-    @apply bg-primary-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700;
+    @apply bg-primary-850 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-primary-700 hover:border-accent-500/50;
   }
 
   .carousel-card {
-    @apply bg-primary-800 rounded-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:border-accent-500 border border-gray-700;
+    @apply bg-primary-850 rounded-lg overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:border-accent-500 border border-primary-700;
   }
 }
 
