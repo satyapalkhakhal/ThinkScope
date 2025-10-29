@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
+import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
   title: 'Contact Us | ThinkScope',
-  description: 'Get in touch with ThinkScope. Send us your questions, feedback, or story ideas via email.',
-  keywords: 'contact ThinkScope, email, get in touch, feedback, inquiries',
+  description: 'Get in touch with ThinkScope. Send us your questions, feedback, or story ideas.',
+  keywords: 'contact ThinkScope, get in touch, feedback, inquiries',
   openGraph: {
     title: 'Contact Us | ThinkScope',
     description: 'Get in touch with ThinkScope. Send us your questions, feedback, or story ideas.',
@@ -16,50 +17,18 @@ export default function ContactPage() {
     <div className="min-h-screen pt-16 bg-primary-900">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         {/* Header */}
-        <div className="text-center mb-16 animate-fade-in-up">
+        <div className="text-center mb-12 animate-fade-in-up">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gradient">
             Get in Touch
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Have a question, feedback, or story idea? We'd love to hear from you.
+            Have a question, feedback, or story idea? Fill out the form below and we'll get back to you.
           </p>
         </div>
 
-        {/* Email Card */}
+        {/* Contact Form */}
         <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          <div className="card p-12 text-center">
-            {/* Icon */}
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-accent-500/20 to-accent-400/20 rounded-2xl mb-6">
-              <span className="text-5xl">📧</span>
-            </div>
-
-            {/* Title */}
-            <h2 className="text-3xl font-bold mb-4">Email Us</h2>
-            
-            {/* Description */}
-            <p className="text-gray-400 mb-8 text-lg">
-              Send us an email and we'll get back to you as soon as possible.
-            </p>
-
-            {/* Email Display */}
-            <div className="bg-primary-800 border border-gray-700 rounded-xl p-6 mb-6">
-              <a 
-                href="mailto:khakhalsatyapal@gmail.com" 
-                className="text-2xl md:text-3xl font-semibold text-accent-500 hover:text-accent-400 transition-colors break-all"
-              >
-                khakhalsatyapal@gmail.com
-              </a>
-            </div>
-
-            {/* CTA Button */}
-            <a
-              href="mailto:khakhalsatyapal@gmail.com"
-              className="inline-flex items-center justify-center px-8 py-4 bg-accent-500 hover:bg-accent-400 text-primary-900 font-semibold rounded-lg transition-all duration-300 hover:scale-105 text-lg"
-            >
-              <span className="mr-2">📨</span>
-              Send Email
-            </a>
-          </div>
+          <ContactForm />
         </div>
 
         {/* Info Section */}

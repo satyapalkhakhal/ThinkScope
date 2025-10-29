@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Mail } from 'lucide-react';
 import { categoryService } from '@/lib/services';
 
 const footerLinks = {
@@ -70,19 +69,6 @@ export default async function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-semibold text-accent-500 mb-4">Contact Info</h3>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-gray-400 text-sm">
-                <Mail className="h-4 w-4 text-accent-500 flex-shrink-0" />
-                <a href="mailto:khakhalsatyapal@gmail.com" className="hover:text-accent-500 transition-colors">
-                  khakhalsatyapal@gmail.com
-                </a>
-              </div>
-            </div>
           </div>
         </div>
 
