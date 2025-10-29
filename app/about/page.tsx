@@ -18,7 +18,7 @@ export default function AboutPage() {
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-up">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
-            About NewsBlog
+            About ThinkScope
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Your trusted source for comprehensive news coverage across technology, world affairs, education, lifestyle, and sports.
@@ -124,7 +124,7 @@ export default function AboutPage() {
           <div className="card p-8">
             <h2 className="text-2xl font-bold text-accent-500 mb-4">Our Team</h2>
             <p className="text-gray-300 leading-relaxed mb-4">
-              NewsBlog is powered by a diverse team of experienced journalists, writers, editors, and digital media professionals.
+              ThinkScope is powered by a diverse team of experienced journalists, writers, editors, and digital media professionals.
               Our team brings together expertise from various fields to deliver comprehensive coverage across all categories.
             </p>
             <p className="text-gray-300 leading-relaxed">

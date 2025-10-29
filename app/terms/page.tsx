@@ -31,11 +31,11 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold text-accent-500 mb-4">Agreement to Terms</h2>
               <p className="text-gray-300 leading-relaxed">
-                By accessing or using NewsBlog ("the Service"), you agree to be bound by these Terms of Service ("Terms").
+                By accessing or using ThinkScope ("the Service"), you agree to be bound by these Terms of Service ("Terms").
                 If you disagree with any part of these terms, you may not access the Service.
               </p>
               <p className="text-gray-300 leading-relaxed">
-                These Terms apply to all visitors, users, and others who access or use the Service. By using NewsBlog,
+                These Terms apply to all visitors, users, and others who access or use the Service. By using ThinkScope,
                 you represent that you are at least 13 years old and have the legal capacity to enter into these Terms.
               </p>
             </section>
@@ -43,7 +43,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold text-accent-500 mb-4">Description of Service</h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                NewsBlog is a digital news platform that provides:
+                ThinkScope is a digital news platform that provides:
               </p>
               <ul className="list-disc list-inside text-gray-300 space-y-2">
                 <li>News articles and content across multiple categories</li>
@@ -97,19 +97,19 @@ export default function TermsPage() {
 
               <h3 className="text-lg font-semibold mb-3">Our Content</h3>
               <p className="text-gray-300 leading-relaxed mb-4">
-                All content on NewsBlog, including articles, images, videos, and graphics, is protected by copyright and other intellectual property laws.
+                All content on ThinkScope, including articles, images, videos, and graphics, is protected by copyright and other intellectual property laws.
                 You may not reproduce, distribute, or create derivative works without explicit permission.
               </p>
 
               <h3 className="text-lg font-semibold mb-3">User-Generated Content</h3>
               <p className="text-gray-300 leading-relaxed mb-4">
-                By submitting content to NewsBlog (comments, feedback, etc.), you grant us a non-exclusive, royalty-free, worldwide license to use,
+                By submitting content to ThinkScope (comments, feedback, etc.), you grant us a non-exclusive, royalty-free, worldwide license to use,
                 display, and distribute your content in connection with the Service.
               </p>
 
               <h3 className="text-lg font-semibold mb-3">DMCA and Copyright</h3>
               <p className="text-gray-300 leading-relaxed">
-                If you believe your copyright has been infringed, please contact us at <a href="mailto:legal@newsblog.com" className="text-accent-500 hover:text-accent-400 transition-colors">legal@newsblog.com</a>.
+                If you believe your copyright has been infringed, please contact us at <a href="mailto:legal@ThinkScope.com" className="text-accent-500 hover:text-accent-400 transition-colors">legal@ThinkScope.com</a>.
                 We respond to valid DMCA takedown notices in accordance with applicable law.
               </p>
             </section>
@@ -125,7 +125,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold text-accent-500 mb-4">Third-Party Links and Services</h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                NewsBlog may contain links to third-party websites or integrate with third-party services. We are not responsible for:
+                ThinkScope may contain links to third-party websites or integrate with third-party services. We are not responsible for:
               </p>
               <ul className="list-disc list-inside text-gray-300 space-y-2">
                 <li>The availability or accuracy of third-party services</li>
@@ -140,7 +140,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold text-accent-500 mb-4">Advertising and Monetization</h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                NewsBlog displays advertisements and may participate in affiliate marketing programs. These activities help support our operations:
+                ThinkScope displays advertisements and may participate in affiliate marketing programs. These activities help support our operations:
               </p>
               <ul className="list-disc list-inside text-gray-300 space-y-2">
                 <li>Advertisements are clearly labeled and distinguished from editorial content</li>
@@ -161,13 +161,13 @@ export default function TermsPage() {
 
               <h3 className="text-lg font-semibold mb-3">Limitation of Liability</h3>
               <p className="text-gray-300 leading-relaxed mb-4">
-                To the fullest extent permitted by law, NewsBlog shall not be liable for any indirect, incidental, special,
+                To the fullest extent permitted by law, ThinkScope shall not be liable for any indirect, incidental, special,
                 consequential, or punitive damages, including but not limited to loss of profits, data, use, or other intangible losses.
               </p>
 
               <h3 className="text-lg font-semibold mb-3">Accuracy of Information</h3>
               <p className="text-gray-300 leading-relaxed">
-                While we strive for accuracy, we do not warrant that all information on NewsBlog is complete, accurate, or current.
+                While we strive for accuracy, we do not warrant that all information on ThinkScope is complete, accurate, or current.
                 News content may contain errors, and we are not liable for any reliance on such information.
               </p>
             </section>
@@ -175,7 +175,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold text-accent-500 mb-4">Indemnification</h2>
               <p className="text-gray-300 leading-relaxed">
-                You agree to indemnify and hold harmless NewsBlog, its officers, directors, employees, and agents from any claims,
+                You agree to indemnify and hold harmless ThinkScope, its officers, directors, employees, and agents from any claims,
                 damages, losses, or expenses arising from your use of the Service, violation of these Terms, or infringement of any rights of another party.
               </p>
             </section>
@@ -231,8 +231,8 @@ export default function TermsPage() {
               </p>
               <div className="bg-primary-800 p-6 rounded-lg">
                 <div className="space-y-2 text-gray-300">
-                  <p><strong>Email:</strong> <a href="mailto:legal@newsblog.com" className="text-accent-500 hover:text-accent-400 transition-colors">legal@newsblog.com</a></p>
-                  <p><strong>Mail:</strong> NewsBlog Legal Team<br />123 News Street<br />Media City, MC 12345<br />United States</p>
+                  <p><strong>Email:</strong> <a href="mailto:legal@ThinkScope.com" className="text-accent-500 hover:text-accent-400 transition-colors">legal@ThinkScope.com</a></p>
+                  <p><strong>Mail:</strong> ThinkScope Legal Team<br />123 News Street<br />Media City, MC 12345<br />United States</p>
                   <p><strong>Phone:</strong> <a href="tel:+15551234567" className="text-accent-500 hover:text-accent-400 transition-colors">+1 (555) 123-4567</a></p>
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold text-accent-500 mb-4">Entire Agreement</h2>
               <p className="text-gray-300 leading-relaxed">
-                These Terms constitute the entire agreement between you and NewsBlog regarding the use of the Service
+                These Terms constitute the entire agreement between you and ThinkScope regarding the use of the Service
                 and supersede all prior agreements and understandings, whether written or oral.
               </p>
             </section>

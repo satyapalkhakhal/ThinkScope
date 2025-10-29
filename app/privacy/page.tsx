@@ -31,12 +31,12 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-2xl font-bold text-accent-500 mb-4">Introduction</h2>
               <p className="text-gray-300 leading-relaxed">
-                At NewsBlog ("we," "our," or "us"), we are committed to protecting your privacy and personal information.
+                At ThinkScope ("we," "our," or "us"), we are committed to protecting your privacy and personal information.
                 This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit
                 our website, use our services, or interact with us.
               </p>
               <p className="text-gray-300 leading-relaxed">
-                By accessing or using NewsBlog, you agree to the collection and use of information in accordance with this policy.
+                By accessing or using ThinkScope, you agree to the collection and use of information in accordance with this policy.
                 We will not use or share your information except as described in this Privacy Policy.
               </p>
             </section>
@@ -57,7 +57,7 @@ export default function PrivacyPage() {
 
               <h3 className="text-lg font-semibold mb-3">Automatically Collected Information</h3>
               <p className="text-gray-300 leading-relaxed mb-4">
-                When you visit NewsBlog, we automatically collect certain information about your device and usage:
+                When you visit ThinkScope, we automatically collect certain information about your device and usage:
               </p>
               <ul className="list-disc list-inside text-gray-300 space-y-2">
                 <li>IP address, browser type, and operating system</li>
@@ -172,7 +172,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-2xl font-bold text-accent-500 mb-4">Children's Privacy</h2>
               <p className="text-gray-300 leading-relaxed">
-                NewsBlog is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13.
+                ThinkScope is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13.
                 If we become aware that we have collected personal information from a child under 13, we will take steps to delete such information promptly.
               </p>
             </section>
@@ -202,8 +202,8 @@ export default function PrivacyPage() {
               </p>
               <div className="bg-primary-800 p-6 rounded-lg">
                 <div className="space-y-2 text-gray-300">
-                  <p><strong>Email:</strong> <a href="mailto:privacy@newsblog.com" className="text-accent-500 hover:text-accent-400 transition-colors">privacy@newsblog.com</a></p>
-                  <p><strong>Mail:</strong> NewsBlog Privacy Team<br />123 News Street<br />Media City, MC 12345<br />United States</p>
+                  <p><strong>Email:</strong> <a href="mailto:privacy@ThinkScope.com" className="text-accent-500 hover:text-accent-400 transition-colors">privacy@ThinkScope.com</a></p>
+                  <p><strong>Mail:</strong> ThinkScope Privacy Team<br />123 News Street<br />Media City, MC 12345<br />United States</p>
                   <p><strong>Phone:</strong> <a href="tel:+15551234567" className="text-accent-500 hover:text-accent-400 transition-colors">+1 (555) 123-4567</a></p>
                 </div>
               </div>

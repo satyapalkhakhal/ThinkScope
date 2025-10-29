@@ -68,7 +68,7 @@ ThinkScope/
 1. Clone the repository:
 ```bash
 git clone <your-repo-url>
-cd NewsBlog
+cd ThinkScope
 ```
 
 2. Install dependencies:
