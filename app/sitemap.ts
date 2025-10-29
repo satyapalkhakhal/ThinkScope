@@ -6,7 +6,7 @@ import { categoryService } from '@/lib/services/category.service';
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://thinkscope.com';
+  const baseUrl = 'https://thinkscope.in';
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [

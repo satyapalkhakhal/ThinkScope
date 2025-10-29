@@ -109,7 +109,7 @@ export default function TermsPage() {
 
               <h3 className="text-lg font-semibold mb-3">DMCA and Copyright</h3>
               <p className="text-gray-300 leading-relaxed">
-                If you believe your copyright has been infringed, please contact us at <a href="mailto:legal@ThinkScope.com" className="text-accent-500 hover:text-accent-400 transition-colors">legal@ThinkScope.com</a>.
+                If you believe your copyright has been infringed, please contact us at <a href="mailto:legal@thinkscope.in" className="text-accent-500 hover:text-accent-400 transition-colors">legal@thinkscope.in</a>.
                 We respond to valid DMCA takedown notices in accordance with applicable law.
               </p>
             </section>
@@ -231,7 +231,7 @@ export default function TermsPage() {
               </p>
               <div className="bg-primary-800 p-6 rounded-lg">
                 <div className="space-y-2 text-gray-300">
-                  <p><strong>Email:</strong> <a href="mailto:legal@ThinkScope.com" className="text-accent-500 hover:text-accent-400 transition-colors">legal@ThinkScope.com</a></p>
+                  <p><strong>Email:</strong> <a href="mailto:legal@thinkscope.in" className="text-accent-500 hover:text-accent-400 transition-colors">legal@thinkscope.in</a></p>
                   <p><strong>Mail:</strong> ThinkScope Legal Team<br />123 News Street<br />Media City, MC 12345<br />United States</p>
                   <p><strong>Phone:</strong> <a href="tel:+15551234567" className="text-accent-500 hover:text-accent-400 transition-colors">+1 (555) 123-4567</a></p>
                 </div>

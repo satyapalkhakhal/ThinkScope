@@ -5,9 +5,9 @@
 **Error:** "URL not allowed - This URL is not allowed for a Sitemap at this location"
 
 **Affected URLs:**
-- `https://thinkscope.com` (Line 3)
-- `https://thinkscope.com/categories` (Line 9)
-- `https://thinkscope.com/blog` (Line 15)
+- `https://thinkscope.in` (Line 3)
+- `https://thinkscope.in/categories` (Line 9)
+- `https://thinkscope.in/blog` (Line 15)
 - 31 total instances
 
 ---
@@ -49,7 +49,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/api/', '/private/'],
     },
-    sitemap: 'https://thinkscope.com/sitemap.xml',
+    sitemap: 'https://thinkscope.in/sitemap.xml',
   };
 }
 ```
@@ -82,7 +82,7 @@ git push
 ### Step 2: Force Google to Re-fetch
 
 1. Go to [Google Search Console](https://search.google.com/search-console)
-2. Select your property (thinkscope.com)
+2. Select your property (thinkscope.in)
 3. Go to **Sitemaps** in left menu
 4. **Remove the old sitemap:**
    - Click the sitemap URL
@@ -95,8 +95,8 @@ git push
 ### Step 3: Test Sitemap Manually
 
 Visit these URLs in your browser:
-- https://thinkscope.com/sitemap.xml
-- https://thinkscope.com/robots.txt
+- https://thinkscope.in/sitemap.xml
+- https://thinkscope.in/robots.txt
 
 **Expected Output:**
 
@@ -105,7 +105,7 @@ Visit these URLs in your browser:
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://thinkscope.com</loc>
+    <loc>https://thinkscope.in</loc>
     <lastmod>2025-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1</priority>
@@ -122,7 +122,7 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
 
-Sitemap: https://thinkscope.com/sitemap.xml
+Sitemap: https://thinkscope.in/sitemap.xml
 ```
 
 ---
@@ -157,7 +157,7 @@ Sitemap: https://thinkscope.com/sitemap.xml
 
 ```bash
 # Test sitemap URL
-curl -I https://thinkscope.com/sitemap.xml
+curl -I https://thinkscope.in/sitemap.xml
 
 # Should return:
 # HTTP/2 200
@@ -168,7 +168,7 @@ curl -I https://thinkscope.com/sitemap.xml
 
 Use Google's Sitemap Validator:
 1. Go to: https://www.xml-sitemaps.com/validate-xml-sitemap.html
-2. Enter: `https://thinkscope.com/sitemap.xml`
+2. Enter: `https://thinkscope.in/sitemap.xml`
 3. Click "Validate"
 4. Should show: ✅ Valid
 
@@ -176,20 +176,20 @@ Use Google's Sitemap Validator:
 
 ```bash
 # Test robots.txt
-curl https://thinkscope.com/robots.txt
+curl https://thinkscope.in/robots.txt
 
 # Should include:
-# Sitemap: https://thinkscope.com/sitemap.xml
+# Sitemap: https://thinkscope.in/sitemap.xml
 ```
 
 ### 4. Test Individual URLs
 
 Visit each URL in browser to ensure they work:
-- ✅ https://thinkscope.com
-- ✅ https://thinkscope.com/categories
-- ✅ https://thinkscope.com/blog
-- ✅ https://thinkscope.com/about
-- ✅ https://thinkscope.com/contact
+- ✅ https://thinkscope.in
+- ✅ https://thinkscope.in/categories
+- ✅ https://thinkscope.in/blog
+- ✅ https://thinkscope.in/about
+- ✅ https://thinkscope.in/contact
 
 ---
 
@@ -216,11 +216,11 @@ Create `/app/sitemap-index.xml` approach:
 export default function sitemapIndex() {
   return [
     {
-      url: 'https://thinkscope.com/sitemap-pages.xml',
+      url: 'https://thinkscope.in/sitemap-pages.xml',
       lastModified: new Date(),
     },
     {
-      url: 'https://thinkscope.com/sitemap-posts.xml',
+      url: 'https://thinkscope.in/sitemap-posts.xml',
       lastModified: new Date(),
     },
   ];
@@ -249,14 +249,14 @@ If dynamic sitemap continues to have issues:
 Add to your monitoring:
 ```bash
 # Check sitemap is accessible
-curl -f https://thinkscope.com/sitemap.xml || alert "Sitemap down"
+curl -f https://thinkscope.in/sitemap.xml || alert "Sitemap down"
 ```
 
 ### 2. Automate Sitemap Submission
 
 When publishing new articles, ping Google:
 ```bash
-curl "https://www.google.com/ping?sitemap=https://thinkscope.com/sitemap.xml"
+curl "https://www.google.com/ping?sitemap=https://thinkscope.in/sitemap.xml"
 ```
 
 ### 3. Set Up Alerts

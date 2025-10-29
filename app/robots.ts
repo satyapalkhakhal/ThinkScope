@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/api/', '/private/'],
     },
-    sitemap: 'https://thinkscope.com/sitemap.xml',
+    sitemap: 'https://thinkscope.in/sitemap.xml',
   };
 }

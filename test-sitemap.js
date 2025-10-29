@@ -39,7 +39,7 @@ async function testSitemap() {
     console.log('\n🗺️  Sample Sitemap URLs:');
     console.log('─'.repeat(80));
     
-    const baseUrl = 'https://thinkscope.com';
+    const baseUrl = 'https://thinkscope.in';
     
     // Static pages
     console.log(`${baseUrl} (priority: 1.0)`);
@@ -66,7 +66,7 @@ async function testSitemap() {
     console.log('\n📝 Next steps:');
     console.log('   1. Run: npm run build');
     console.log('   2. Deploy to production');
-    console.log('   3. Visit: https://thinkscope.com/sitemap.xml');
+    console.log('   3. Visit: https://thinkscope.in/sitemap.xml');
     console.log('   4. Submit to Google Search Console');
 
   } catch (error) {

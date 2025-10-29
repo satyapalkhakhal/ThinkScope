@@ -202,7 +202,7 @@ export default function PrivacyPage() {
               </p>
               <div className="bg-primary-800 p-6 rounded-lg">
                 <div className="space-y-2 text-gray-300">
-                  <p><strong>Email:</strong> <a href="mailto:privacy@ThinkScope.com" className="text-accent-500 hover:text-accent-400 transition-colors">privacy@ThinkScope.com</a></p>
+                  <p><strong>Email:</strong> <a href="mailto:privacy@thinkscope.in" className="text-accent-500 hover:text-accent-400 transition-colors">privacy@thinkscope.in</a></p>
                   <p><strong>Mail:</strong> ThinkScope Privacy Team<br />123 News Street<br />Media City, MC 12345<br />United States</p>
                   <p><strong>Phone:</strong> <a href="tel:+15551234567" className="text-accent-500 hover:text-accent-400 transition-colors">+1 (555) 123-4567</a></p>
                 </div>

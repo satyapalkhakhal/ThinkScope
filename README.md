@@ -156,7 +156,7 @@ The website includes all necessary pages for Google AdSense approval:
 
 For questions, issues, or contributions:
 - Create an issue in the repository
-- Contact: info@thinkscope.com
+- Contact: info@thinkscope.in
 
 ## 📄 License
 

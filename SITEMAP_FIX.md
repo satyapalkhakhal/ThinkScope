@@ -2,9 +2,9 @@
 
 ## Problem
 Google Search Console was showing errors:
-- "URL not allowed" for `https://thinkscope.com`
-- "URL not allowed" for `https://thinkscope.com/categories`
-- "URL not allowed" for `https://thinkscope.com/blog`
+- "URL not allowed" for `https://thinkscope.in`
+- "URL not allowed" for `https://thinkscope.in/categories`
+- "URL not allowed" for `https://thinkscope.in/blog`
 
 ## Root Cause
 The sitemap was using static data from `@/data/categories` instead of fetching real articles from your Supabase database.
@@ -58,9 +58,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 - ✅ Uses your existing `articleService` and `categoryService`
 
 ### 2. Proper URL Structure
-- ✅ All URLs use `https://thinkscope.com` as base
-- ✅ Category URLs: `https://thinkscope.com/category/{slug}`
-- ✅ Blog URLs: `https://thinkscope.com/blog/{slug}`
+- ✅ All URLs use `https://thinkscope.in` as base
+- ✅ Category URLs: `https://thinkscope.in/category/{slug}`
+- ✅ Blog URLs: `https://thinkscope.in/blog/{slug}`
 - ✅ Static pages included with correct priorities
 
 ### 3. SEO Improvements
@@ -77,7 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   <!-- Static Pages (Priority 1.0 - 0.5) -->
   <url>
-    <loc>https://thinkscope.com</loc>
+    <loc>https://thinkscope.in</loc>
     <lastmod>2025-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -85,7 +85,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   <!-- Category Pages (Priority 0.8) -->
   <url>
-    <loc>https://thinkscope.com/category/politics</loc>
+    <loc>https://thinkscope.in/category/politics</loc>
     <lastmod>2025-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -93,7 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   <!-- Blog Posts (Priority 0.6) -->
   <url>
-    <loc>https://thinkscope.com/blog/article-slug</loc>
+    <loc>https://thinkscope.in/blog/article-slug</loc>
     <lastmod>2025-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -113,16 +113,16 @@ npm run build
 
 ### 2. Verify Sitemap
 After deployment, check:
-- `https://thinkscope.com/sitemap.xml`
+- `https://thinkscope.in/sitemap.xml`
 
 You should see all your articles from the database!
 
 ### 3. Resubmit to Google Search Console
 1. Go to [Google Search Console](https://search.google.com/search-console)
-2. Select your property (thinkscope.com)
+2. Select your property (thinkscope.in)
 3. Go to **Sitemaps** in the left menu
 4. Remove the old sitemap (if any)
-5. Add: `https://thinkscope.com/sitemap.xml`
+5. Add: `https://thinkscope.in/sitemap.xml`
 6. Click **Submit**
 
 ### 4. Wait for Google to Recrawl
