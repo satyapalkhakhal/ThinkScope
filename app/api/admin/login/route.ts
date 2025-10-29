@@ -12,10 +12,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate credentials
-    const isValid = validateCredentials(email, password);
+    // Validate credentials against database
+    const user = await validateCredentials(email, password);
 
-    if (!isValid) {
+    if (!user) {
       return NextResponse.json(
         { error: 'Invalid credentials' },
         { status: 401 }
@@ -28,7 +28,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       token,
-      user: { email, role: 'admin' },
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      },
     });
   } catch (error) {
     console.error('Login error:', error);

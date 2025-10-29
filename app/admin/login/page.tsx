@@ -99,9 +99,7 @@ export default function AdminLogin() {
           </button>
         </form>
         <div className="text-center text-sm text-gray-400">
-          <p>Default credentials:</p>
-          <p className="text-accent-400 font-mono">admin@thinkscope.in / admin123</p>
-          <p className="mt-2 text-xs text-gray-500">Change in .env file</p>
+          <p>Enter your admin credentials to continue</p>
         </div>
       </div>
     </div>
