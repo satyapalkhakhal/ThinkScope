@@ -50,21 +50,21 @@ export default async function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity"></div>
                   
                   {/* Content */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <div className="absolute inset-0 p-4 md:p-8 flex flex-col justify-end">
                     {categoryMap.get(articles[0].category_id) && (
-                      <span className="inline-block mb-3 text-xs text-accent-400 font-bold uppercase tracking-wider">
+                      <span className="inline-block mb-2 text-[10px] md:text-xs text-accent-400 font-bold uppercase tracking-wider">
                         {categoryMap.get(articles[0].category_id)}
                       </span>
                     )}
-                    <h3 className="text-white font-bold text-2xl md:text-3xl line-clamp-3 group-hover:text-accent-400 transition-colors mb-3">
+                    <h3 className="text-white font-bold text-lg md:text-2xl lg:text-3xl line-clamp-3 md:line-clamp-3 group-hover:text-accent-400 transition-colors">
                       {articles[0].title}
                     </h3>
                     {articles[0].excerpt && (
-                      <p className="text-gray-300 text-sm line-clamp-2 mb-4">
+                      <p className="hidden md:block text-gray-300 text-sm line-clamp-2 mb-4">
                         {articles[0].excerpt}
                       </p>
                     )}
-                    <div className="flex items-center gap-2 text-gray-400 text-xs">
+                    <div className="hidden md:flex items-center gap-2 text-gray-400 text-xs">
                       <span>{articles[0].read_time}</span>
                       <span>•</span>
                       <span>{articles[0].view_count || 0} views</span>
@@ -72,9 +72,10 @@ export default async function Hero() {
                   </div>
 
                   {/* Featured Badge */}
-                  <div className="absolute top-4 left-4 bg-accent-500 text-primary-900 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                    <TrendingUp className="h-3 w-3" />
-                    FEATURED
+                  <div className="absolute top-3 left-3 md:top-4 md:left-4 bg-accent-500 text-primary-900 text-[10px] md:text-xs font-bold px-2 py-1 md:px-3 md:py-1.5 rounded-full flex items-center gap-1">
+                    <TrendingUp className="h-2.5 w-2.5 md:h-3 md:w-3" />
+                    <span className="hidden sm:inline">FEATURED</span>
+                    <span className="sm:hidden">★</span>
                   </div>
                 </Link>
               )}
