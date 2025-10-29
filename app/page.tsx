@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Enable ISR (Incremental Static Regeneration) - revalidate every hour
-export const revalidate = 3600;
+// Enable ISR (Incremental Static Regeneration) - revalidate every 2 minutes
+export const revalidate = 120;
 
 export default async function HomePage() {
   // Fetch categories from Supabase

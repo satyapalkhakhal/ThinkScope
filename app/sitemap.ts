@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next';
 import { articleService } from '@/lib/services/article.service';
 import { categoryService } from '@/lib/services/category.service';
 
-// Revalidate sitemap every hour
-export const revalidate = 3600;
+// Revalidate sitemap every 2 minutes
+export const revalidate = 120;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://thinkscope.in';

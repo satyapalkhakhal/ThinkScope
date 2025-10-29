@@ -17,7 +17,7 @@ export interface ApiResponse<T> {
 }
 
 export interface CacheOptions {
-  /** Cache duration in seconds. Default: 1200 (20 minutes) */
+  /** Cache duration in seconds. Default: 120 (2 minutes) */
   revalidate?: number;
   /** Disable caching for this request */
   noCache?: boolean;
@@ -64,7 +64,7 @@ class SupabaseService {
       }
 
       // Configure caching
-      const revalidate = cacheOptions?.revalidate ?? 1200; // Default 20 minutes
+      const revalidate = cacheOptions?.revalidate ?? 120; // Default 2 minutes
       const useCache = !cacheOptions?.noCache;
 
       console.log(`[Cache] Fetching ${endpoint} - Cache: ${useCache ? `${revalidate}s` : 'disabled'}`);
