@@ -54,7 +54,7 @@ class ArticleService {
       params.title = `ilike.*${filters.searchQuery}*`;
     }
 
-    return supabaseService.get<Article[]>(this.endpoint, params);
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -70,7 +70,7 @@ class ArticleService {
       limit,
     };
 
-    return supabaseService.get<Article[]>(this.endpoint, params);
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -83,7 +83,7 @@ class ArticleService {
       limit: 1,
     };
 
-    return supabaseService.get<Article[]>(this.endpoint, params);
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -97,7 +97,7 @@ class ArticleService {
       limit: 1,
     };
 
-    return supabaseService.get<Article[]>(this.endpoint, params);
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -111,7 +111,7 @@ class ArticleService {
       limit,
     };
 
-    return supabaseService.get<Article[]>(this.endpoint, params);
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -125,7 +125,7 @@ class ArticleService {
       limit,
     };
 
-    return supabaseService.get<Article[]>(this.endpoint, params);
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -141,7 +141,7 @@ class ArticleService {
       limit,
     };
 
-    return supabaseService.get<Article[]>(this.endpoint, params);
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 600 });
   }
 
   /**
@@ -163,7 +163,7 @@ class ArticleService {
       limit,
     };
 
-    return supabaseService.get<Article[]>(this.endpoint, params);
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -179,7 +179,7 @@ class ArticleService {
       limit,
     };
 
-    return supabaseService.get<Article[]>(this.endpoint, params);
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -194,7 +194,7 @@ class ArticleService {
       order: 'published_at.desc',
     };
 
-    return supabaseService.get<Article[]>(this.endpoint, params);
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**

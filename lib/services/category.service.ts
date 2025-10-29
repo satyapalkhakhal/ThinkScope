@@ -22,7 +22,7 @@ class CategoryService {
       params['is_active'] = 'eq.true';
     }
 
-    return supabaseService.get<Category[]>(this.endpoint, params);
+    return supabaseService.get<Category[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -35,7 +35,7 @@ class CategoryService {
       limit: 1,
     };
 
-    return supabaseService.get<Category[]>(this.endpoint, params);
+    return supabaseService.get<Category[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -48,7 +48,7 @@ class CategoryService {
       limit: 1,
     };
 
-    return supabaseService.get<Category[]>(this.endpoint, params);
+    return supabaseService.get<Category[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**
@@ -60,7 +60,7 @@ class CategoryService {
       select: 'id',
     };
 
-    return supabaseService.get<Category[]>(this.endpoint, params);
+    return supabaseService.get<Category[]>(this.endpoint, params, { revalidate: 1200 });
   }
 
   /**

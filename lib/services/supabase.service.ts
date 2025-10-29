@@ -16,6 +16,13 @@ export interface ApiResponse<T> {
   status: number;
 }
 
+export interface CacheOptions {
+  /** Cache duration in seconds. Default: 1200 (20 minutes) */
+  revalidate?: number;
+  /** Disable caching for this request */
+  noCache?: boolean;
+}
+
 /**
  * Base API client for Supabase REST API
  */
@@ -34,9 +41,16 @@ class SupabaseService {
   }
 
   /**
-   * Generic GET request
+   * Generic GET request with caching support
+   * @param endpoint - API endpoint
+   * @param params - Query parameters
+   * @param cacheOptions - Cache configuration
    */
-  async get<T>(endpoint: string, params?: Record<string, any>): Promise<ApiResponse<T>> {
+  async get<T>(
+    endpoint: string, 
+    params?: Record<string, any>,
+    cacheOptions?: CacheOptions
+  ): Promise<ApiResponse<T>> {
     try {
       const url = new URL(`${this.baseURL}${endpoint}`);
       
@@ -49,10 +63,16 @@ class SupabaseService {
         });
       }
 
+      // Configure caching
+      const revalidate = cacheOptions?.revalidate ?? 1200; // Default 20 minutes
+      const useCache = !cacheOptions?.noCache;
+
+      console.log(`[Cache] Fetching ${endpoint} - Cache: ${useCache ? `${revalidate}s` : 'disabled'}`);
+
       const response = await fetch(url.toString(), {
         method: 'GET',
         headers: this.headers,
-        cache: 'no-store', // Disable caching for fresh data
+        ...(useCache ? { next: { revalidate } } : { cache: 'no-store' }),
       });
 
       if (!response.ok) {
