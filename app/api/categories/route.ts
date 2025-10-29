@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      categories: response.data,
+      data: response.data,
     });
   } catch (error) {
     console.error('Categories fetch error:', error);
