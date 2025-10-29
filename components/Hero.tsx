@@ -1,51 +1,129 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { articleService, categoryService } from '@/lib/services';
+import { TrendingUp } from 'lucide-react';
+import type { Article, Category } from '@/lib/services';
 
-export default function Hero() {
+export default async function Hero() {
+  // Fetch latest articles and randomize them
+  const { data: latestArticles } = await articleService.getLatest(20);
+  
+  // Shuffle articles to get random selection
+  const shuffled = (latestArticles || []).sort(() => Math.random() - 0.5);
+  const articles = shuffled.slice(0, 6);
+  
+  // Fetch categories to map category names
+  const { data: categories } = await categoryService.getAll();
+  const categoryMap = new Map((categories || []).map((cat: Category) => [cat.id, cat.name]));
+
   return (
-    <section className="relative pt-16 pb-20 bg-gradient-to-br from-primary-800 to-primary-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="animate-fade-in-up">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient hero-title">
-            Stay Updated with Latest News
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Your trusted source for breaking news, technology updates, world affairs, education, lifestyle, and sports on ThinkScope
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/blog"
-              className="btn-primary text-lg px-8 py-3"
-            >
-              Read Latest Articles
-            </Link>
-            <Link
-              href="#categories"
-              className="btn-secondary text-lg px-8 py-3"
-            >
-              Explore Categories
-            </Link>
-          </div>
-        </div>
+    <section className="relative pt-24 pb-12 bg-gradient-to-br from-primary-800 to-primary-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Trending News Grid */}
+        {articles.length > 0 && (
+          <div className="animate-fade-in-up">
+            {/* Main Grid - Large Featured + Small Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Large Featured Article */}
+              {articles[0] && (
+                <Link
+                  href={`/blog/${articles[0].slug}`}
+                  className="lg:col-span-2 group relative overflow-hidden rounded-2xl aspect-[16/10] bg-primary-800 hover:shadow-2xl transition-all duration-300"
+                >
+                  {/* Image */}
+                  {articles[0].featured_image_url ? (
+                    <Image
+                      src={articles[0].featured_image_url}
+                      alt={articles[0].featured_image_alt || articles[0].title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 1024px) 100vw, 66vw"
+                      priority
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent-500/20 to-accent-600/20 flex items-center justify-center">
+                      <span className="text-8xl opacity-20">📰</span>
+                    </div>
+                  )}
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity"></div>
+                  
+                  {/* Content */}
+                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                    {categoryMap.get(articles[0].category_id) && (
+                      <span className="inline-block mb-3 text-xs text-accent-400 font-bold uppercase tracking-wider">
+                        {categoryMap.get(articles[0].category_id)}
+                      </span>
+                    )}
+                    <h3 className="text-white font-bold text-2xl md:text-3xl line-clamp-3 group-hover:text-accent-400 transition-colors mb-3">
+                      {articles[0].title}
+                    </h3>
+                    {articles[0].excerpt && (
+                      <p className="text-gray-300 text-sm line-clamp-2 mb-4">
+                        {articles[0].excerpt}
+                      </p>
+                    )}
+                    <div className="flex items-center gap-2 text-gray-400 text-xs">
+                      <span>{articles[0].read_time}</span>
+                      <span>•</span>
+                      <span>{articles[0].view_count || 0} views</span>
+                    </div>
+                  </div>
 
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent-500 mb-2">10K+</div>
-            <div className="text-gray-400">Articles</div>
+                  {/* Featured Badge */}
+                  <div className="absolute top-4 left-4 bg-accent-500 text-primary-900 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+                    <TrendingUp className="h-3 w-3" />
+                    FEATURED
+                  </div>
+                </Link>
+              )}
+
+              {/* Small Article Cards - Right Side */}
+              <div className="flex flex-col gap-4">
+                {articles.slice(1, 4).map((article, index) => (
+                  <Link
+                    key={article.id}
+                    href={`/blog/${article.slug}`}
+                    className="group flex gap-4 bg-primary-800 hover:bg-primary-700 rounded-xl p-4 transition-all duration-300 hover:shadow-lg"
+                  >
+                    {/* Small Image */}
+                    <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-primary-700">
+                      {article.featured_image_url ? (
+                        <Image
+                          src={article.featured_image_url}
+                          alt={article.featured_image_alt || article.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          sizes="96px"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-accent-500/20 to-accent-600/20 flex items-center justify-center">
+                          <span className="text-2xl opacity-30">📰</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      {categoryMap.get(article.category_id) && (
+                        <span className="text-xs text-accent-400 font-semibold uppercase tracking-wide">
+                          {categoryMap.get(article.category_id)}
+                        </span>
+                      )}
+                      <h4 className="text-white font-semibold text-sm mt-1 line-clamp-2 group-hover:text-accent-400 transition-colors">
+                        {article.title}
+                      </h4>
+                      <div className="flex items-center gap-2 text-gray-500 text-xs mt-2">
+                        <span>{article.read_time}</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent-500 mb-2">50K+</div>
-            <div className="text-gray-400">Readers</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent-500 mb-2">24/7</div>
-            <div className="text-gray-400">Updates</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent-500 mb-2">6</div>
-            <div className="text-gray-400">Categories</div>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Background decoration */}
