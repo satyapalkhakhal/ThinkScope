@@ -32,6 +32,9 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     title: `${category.name} | ThinkScope - Latest ${category.name} News`,
     description: `Stay updated with the latest ${category.name.toLowerCase()} news, articles, and insights. ${category.description || ''}`,
     keywords: keywords,
+    alternates: {
+      canonical: `/category/${category.slug}`,
+    },
     openGraph: {
       title: `${category.name} | ThinkScope - Latest ${category.name} News`,
       description: `Stay updated with the latest ${category.name.toLowerCase()} news, articles, and insights.`,

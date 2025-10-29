@@ -33,11 +33,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     title: `${article.title} | ThinkScope`,
     description: article.excerpt,
     keywords: keywords,
+    alternates: {
+      canonical: `/blog/${article.slug}`,
+    },
     openGraph: {
       title: `${article.title} | ThinkScope`,
       description: article.excerpt,
       type: 'article',
       publishedTime: article.published_at,
+      modifiedTime: article.updated_at || article.published_at,
       authors: ['ThinkScope Team'],
       images: [
         {
@@ -121,5 +125,41 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     slug: rel.slug,
   }));
 
-  return <BlogPost article={transformedArticle} relatedArticles={transformedRelated} />;
+  // JSON-LD structured data for article
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: article.title,
+    description: article.excerpt,
+    image: article.featured_image_url,
+    datePublished: article.published_at,
+    dateModified: article.updated_at || article.published_at,
+    author: {
+      '@type': 'Organization',
+      name: 'ThinkScope Team',
+      url: 'https://thinkscope.in/about',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ThinkScope',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://thinkscope.in/icon-512x512.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://thinkscope.in/blog/${article.slug}`,
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <BlogPost article={transformedArticle} relatedArticles={transformedRelated} />
+    </>
+  );
 }

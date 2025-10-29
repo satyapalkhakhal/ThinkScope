@@ -73,6 +73,37 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Organization structured data
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'ThinkScope',
+    url: 'https://thinkscope.in',
+    logo: 'https://thinkscope.in/icon-512x512.png',
+    sameAs: [
+      'https://twitter.com/thinkscope',
+      // Add more social media profiles here
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Service',
+      url: 'https://thinkscope.in/contact',
+    },
+  };
+
+  // Website structured data
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'ThinkScope',
+    url: 'https://thinkscope.in',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://thinkscope.in/search?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
   return (
     <html lang="en" className="dark">
       <head>
@@ -85,6 +116,14 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="ThinkScope" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2757390342181644" crossOrigin="anonymous"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBZK7E1G01"></script>
         <script
