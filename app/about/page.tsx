@@ -30,7 +30,7 @@ export default function AboutPage() {
           <div className="card p-8">
             <h2 className="text-2xl font-bold text-accent-500 mb-4">Our Mission</h2>
             <p className="text-gray-300 leading-relaxed mb-4">
-              At NewsBlog, we believe that access to accurate, timely, and comprehensive information is fundamental to an informed society.
+              At ThemeScope, we believe that access to accurate, timely, and comprehensive information is fundamental to an informed society.
               Our mission is to deliver high-quality journalism that empowers readers to make informed decisions and stay connected with the world around them.
             </p>
             <p className="text-gray-300 leading-relaxed">
