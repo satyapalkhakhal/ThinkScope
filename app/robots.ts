@@ -7,6 +7,10 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/api/', '/private/'],
     },
-    sitemap: 'https://thinkscope.in/sitemap.xml',
+    sitemap: [
+      'https://thinkscope.in/sitemap.xml',
+      'https://thinkscope.in/news-sitemap.xml',
+      'https://thinkscope.in/image-sitemap.xml',
+    ],
   };
 }

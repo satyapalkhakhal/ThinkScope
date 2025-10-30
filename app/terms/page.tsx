@@ -12,8 +12,29 @@ export const metadata: Metadata = {
 };
 
 export default function TermsPage() {
+  // WebPage schema for terms of service
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Terms of Service',
+    description: 'ThinkScope Terms of Service: Read our user agreement and terms of use.',
+    url: 'https://thinkscope.in/terms',
+    inLanguage: 'en-US',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'ThinkScope',
+      url: 'https://thinkscope.in',
+    },
+    datePublished: '2025-01-24',
+    dateModified: '2025-01-24',
+  };
+
   return (
     <div className="min-h-screen pt-16 bg-primary-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-up">

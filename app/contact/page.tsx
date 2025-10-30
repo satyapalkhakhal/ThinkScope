@@ -13,8 +13,33 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  // ContactPage Schema
+  const contactSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact ThinkScope',
+    description: 'Get in touch with ThinkScope for questions, feedback, or story ideas.',
+    url: 'https://thinkscope.in/contact',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'ThinkScope',
+      url: 'https://thinkscope.in',
+      logo: 'https://thinkscope.in/favicon_io/android-chrome-512x512.png',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'Customer Service',
+        availableLanguage: 'English',
+        areaServed: 'Worldwide',
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen pt-16 bg-primary-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-up">

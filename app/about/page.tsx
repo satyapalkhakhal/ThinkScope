@@ -12,8 +12,52 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  // FAQ Schema for About page
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is ThinkScope?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'ThinkScope is your trusted source for breaking news, technology updates, world affairs, education, lifestyle, and sports coverage. We deliver high-quality journalism that empowers readers to make informed decisions.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What topics does ThinkScope cover?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'We cover Technology, Breaking News, World Affairs, Education, Lifestyle, and Sports with in-depth analysis and timely reporting from experienced journalists.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Who writes for ThinkScope?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'ThinkScope is powered by a diverse team of experienced journalists, writers, editors, and digital media professionals who bring expertise from various fields to deliver comprehensive coverage.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What are ThinkScope\'s core values?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Our core values are Accuracy (factual reporting from verified sources), Impartiality (unbiased journalism), Timeliness (real-time news delivery), and Accessibility (content available across all platforms).',
+        },
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen pt-16 bg-primary-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in-up">
