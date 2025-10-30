@@ -19,6 +19,16 @@ export default async function Hero() {
   return (
     <section className="relative pt-24 pb-12 bg-gradient-to-br from-primary-800 to-primary-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Page Title - SEO H1 */}
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
+            ThinkScope - Latest News & Updates
+          </h1>
+          <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+            Stay informed with breaking news, technology updates, world affairs, education, lifestyle, and sports coverage. Your trusted source for comprehensive news analysis and current events.
+          </p>
+        </div>
+
         {/* Trending News Grid */}
         {articles.length > 0 && (
           <div className="animate-fade-in-up">

@@ -24,7 +24,7 @@ export default function ContactPage() {
       '@type': 'Organization',
       name: 'ThinkScope',
       url: 'https://thinkscope.in',
-      logo: 'https://thinkscope.in/icon-512x512.png',
+      logo: 'https://thinkscope.in/favicon_io/android-chrome-512x512.png',
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'Customer Service',

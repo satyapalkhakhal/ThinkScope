@@ -44,7 +44,7 @@ export async function GET() {
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml" />
     <image>
-      <url>${baseUrl}/icon-512x512.png</url>
+      <url>${baseUrl}/favicon_io/android-chrome-512x512.png</url>
       <title>ThinkScope</title>
       <link>${baseUrl}</link>
     </image>

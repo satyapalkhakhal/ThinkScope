@@ -89,7 +89,7 @@ export default function RootLayout({
     '@type': 'Organization',
     name: 'ThinkScope',
     url: 'https://thinkscope.in',
-    logo: 'https://thinkscope.in/icon-512x512.png',
+    logo: 'https://thinkscope.in/favicon_io/android-chrome-512x512.png',
     sameAs: [
       'https://twitter.com/thinkscope',
       // Add more social media profiles here
@@ -117,7 +117,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="icon" href="/favicon.png" />
+        {/* Favicon - Multiple formats for browser compatibility */}
+        <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#00ff88" />
         
@@ -129,9 +132,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://mrvapygtxktrgilxqgqr.supabase.co" />
         
         {/* App Icons */}
-        <link rel="apple-touch-icon" href="/icon-192x192.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/favicon_io/android-chrome-512x512.png" />
         
         {/* RSS Feed */}
         <link rel="alternate" type="application/rss+xml" title="ThinkScope RSS Feed" href="/feed.xml" />

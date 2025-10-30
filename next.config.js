@@ -17,6 +17,45 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // WWW to non-WWW redirect
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.thinkscope.in',
+          },
+        ],
+        destination: 'https://thinkscope.in/:path*',
+        permanent: true,
+      },
+      // Index.html redirects
+      {
+        source: '/index.html',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/index.php',
+        destination: '/',
+        permanent: true,
+      },
+      // Catch-all for any path with .html extension
+      {
+        source: '/:path*.html',
+        destination: '/:path*',
+        permanent: true,
+      },
+      // Catch-all for any path with .php extension
+      {
+        source: '/:path*.php',
+        destination: '/:path*',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

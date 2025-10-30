@@ -144,7 +144,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       name: 'ThinkScope',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://thinkscope.in/icon-512x512.png',
+        url: 'https://thinkscope.in/favicon_io/android-chrome-512x512.png',
       },
     },
     mainEntityOfPage: {
