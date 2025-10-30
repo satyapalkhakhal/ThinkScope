@@ -8,12 +8,17 @@ import ScrollToTop from '@/components/ScrollToTop';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'ThinkScope - Stay Updated with Latest News',
+  title: {
+    default: 'ThinkScope - Stay Updated with Latest News',
+    template: '%s | ThinkScope',
+  },
   description: 'Your trusted source for breaking news, technology updates, world affairs, education, lifestyle, and sports. Stay informed with our comprehensive coverage.',
   keywords: 'news, technology, world affairs, education, lifestyle, sports, breaking news, current events',
-  authors: [{ name: 'ThinkScope Team' }],
+  authors: [{ name: 'ThinkScope Team', url: 'https://thinkscope.in/about' }],
   creator: 'ThinkScope',
   publisher: 'ThinkScope',
+  category: 'News',
+  classification: 'News and Media',
   formatDetection: {
     email: false,
     address: false,
@@ -53,6 +58,11 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+  },
+  other: {
+    'google-site-verification': 'your-google-site-verification-code',
+    'msvalidate.01': 'your-bing-verification-code', // Bing Webmaster Tools
+    'facebook-domain-verification': 'your-facebook-verification', // Facebook verification
   },
   verification: {
     google: 'your-google-site-verification-code',
@@ -110,12 +120,27 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#00ff88" />
+        
+        {/* DNS Prefetch & Preconnect for Performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="https://mrvapygtxktrgilxqgqr.supabase.co" />
+        
+        {/* App Icons */}
         <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
+        
+        {/* RSS Feed */}
+        <link rel="alternate" type="application/rss+xml" title="ThinkScope RSS Feed" href="/feed.xml" />
+        
+        {/* PWA Meta Tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="ThinkScope" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

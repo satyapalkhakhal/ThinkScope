@@ -126,7 +126,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }));
 
   // JSON-LD structured data for article
-  const jsonLd = {
+  const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
     headline: article.title,
@@ -151,13 +151,54 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       '@type': 'WebPage',
       '@id': `https://thinkscope.in/blog/${article.slug}`,
     },
+    wordCount: article.content ? article.content.split(' ').length : 0,
+    articleSection: category?.name || 'Uncategorized',
+    inLanguage: 'en-US',
+    // Speakable schema for voice search (Google Assistant, Alexa)
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', '.article-excerpt'], // Title and excerpt are voice-friendly
+    },
+    // Additional metadata for better indexing
+    keywords: article.title.split(' ').filter((word: string) => word.length > 3).join(', '),
+    thumbnailUrl: article.featured_image_url,
+  };
+
+  // Breadcrumb structured data
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://thinkscope.in',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: 'https://thinkscope.in/blog',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: article.title,
+        item: `https://thinkscope.in/blog/${article.slug}`,
+      },
+    ],
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <BlogPost article={transformedArticle} relatedArticles={transformedRelated} />
     </>

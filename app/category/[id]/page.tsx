@@ -105,5 +105,55 @@ export default async function Category({ params }: CategoryPageProps) {
     })),
   };
 
-  return <CategoryPage category={transformedCategory} />;
+  // CollectionPage Schema for category
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${category.name} Articles`,
+    description: category.description || `Latest ${category.name.toLowerCase()} news and articles from ThinkScope`,
+    url: `https://thinkscope.in/category/${category.slug}`,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: (articles || []).length,
+      itemListElement: (articles || []).slice(0, 10).map((article, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `https://thinkscope.in/blog/${article.slug}`,
+        name: article.title,
+      })),
+    },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://thinkscope.in',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Categories',
+          item: 'https://thinkscope.in/categories',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: category.name,
+          item: `https://thinkscope.in/category/${category.slug}`,
+        },
+      ],
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
+      <CategoryPage category={transformedCategory} />
+    </>
+  );
 }
