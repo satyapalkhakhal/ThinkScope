@@ -27,6 +27,7 @@ export interface Article {
   featured_image_alt: string | null;
   meta_title: string | null;
   meta_description: string | null;
+  meta_keywords: string | null;
   read_time: string;
   view_count: number;
   status: 'draft' | 'published' | 'archived';
