@@ -129,6 +129,20 @@ class ArticleService {
   }
 
   /**
+   * Get recently uploaded articles (by created_at)
+   * @param limit - Number of articles to fetch
+   */
+  async getRecentlyUploaded(limit: number = 20): Promise<ApiResponse<Article[]>> {
+    const params = {
+      status: 'eq.published',
+      order: 'created_at.desc',
+      limit,
+    };
+
+    return supabaseService.get<Article[]>(this.endpoint, params, { revalidate: 120 });
+  }
+
+  /**
    * Search articles
    * @param query - Search query
    * @param limit - Number of results

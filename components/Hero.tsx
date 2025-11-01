@@ -5,11 +5,21 @@ import { TrendingUp } from 'lucide-react';
 import type { Article, Category } from '@/lib/services';
 
 export default async function Hero() {
-  // Fetch latest articles and randomize them
-  const { data: latestArticles } = await articleService.getLatest(20);
+  // Fetch top 20 recently uploaded articles and shuffle them
+  const { data: recentArticles } = await articleService.getRecentlyUploaded(20);
   
-  // Shuffle articles to get random selection
-  const shuffled = (latestArticles || []).sort(() => Math.random() - 0.5);
+  // Fisher-Yates shuffle algorithm for better randomization
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+  
+  // Shuffle and take first 6 articles for display
+  const shuffled = shuffleArray(recentArticles || []);
   const articles = shuffled.slice(0, 6);
   
   // Fetch categories to map category names
