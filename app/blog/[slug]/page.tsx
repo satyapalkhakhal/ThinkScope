@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import BlogPost from '@/components/BlogPost';
-import { articleService, categoryService } from '@/lib/services';
+import { articleService, categoryService, authorService } from '@/lib/services';
 
 interface BlogPostPageProps {
   params: {
@@ -25,6 +25,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
+  // Fetch author if available
+  let authorName = 'ThinkScope Team';
+  if (article.author_id) {
+    const { data: authorData } = await authorService.getById(article.author_id);
+    if (authorData?.[0]) {
+      authorName = authorData[0].name;
+    }
+  }
+
   // Generate keywords from title and category
   const titleWords = article.title.split(' ').filter(word => word.length > 3).slice(0, 5).join(', ');
   const keywords = `${titleWords}, ${article.title}, ThinkScope, news, article`;
@@ -42,7 +51,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       type: 'article',
       publishedTime: article.published_at,
       modifiedTime: article.updated_at || article.published_at,
-      authors: ['ThinkScope Team'],
+      authors: [authorName],
       images: [
         {
           url: article.featured_image_url,
@@ -90,6 +99,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { data: categoryData } = await categoryService.getById(article.category_id);
   const category = categoryData?.[0];
 
+  // Fetch author for the article
+  let author = null;
+  if (article.author_id) {
+    const { data: authorData } = await authorService.getById(article.author_id);
+    author = authorData?.[0];
+  }
+
   // Fetch related articles from same category
   const { data: relatedArticles } = await articleService.getRelated(
     article.id,
@@ -108,8 +124,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     category: category?.name || 'Uncategorized',
     slug: article.slug,
     categoryId: category?.slug || '',
-    author: 'ThinkScope Team',
-    authorTitle: 'Editorial Team',
+    author: author?.name || 'ThinkScope Team',
+    authorTitle: author?.bio || 'Editorial Team',
     content: article.content,
   };
 
@@ -134,7 +150,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     image: article.featured_image_url,
     datePublished: article.published_at,
     dateModified: article.updated_at || article.published_at,
-    author: {
+    author: author ? {
+      '@type': 'Person',
+      name: author.name,
+      ...(author.bio && { description: author.bio }),
+    } : {
       '@type': 'Organization',
       name: 'ThinkScope Team',
       url: 'https://thinkscope.in/about',

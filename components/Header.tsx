@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, Newspaper, Search, ChevronDown } from 'lucide-react';
+import { Menu, X, Newspaper, Search, ChevronDown, LogIn } from 'lucide-react';
 import { categoryService, Category } from '@/lib/services';
 
 // Static navigation items (non-category pages)
@@ -201,6 +201,15 @@ export default function Header() {
               <Search className="h-5 w-5" />
             </button>
 
+            {/* Login Button */}
+            <Link
+              href="/admin/login"
+              className="hidden md:flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium bg-accent-500 text-primary-900 hover:bg-accent-400 transition-all duration-200 shadow-lg hover:shadow-accent-500/20"
+            >
+              <LogIn className="h-4 w-4" />
+              <span>Login</span>
+            </Link>
+
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -260,6 +269,18 @@ export default function Header() {
                   {category.name}
                 </Link>
               ))}
+            </div>
+
+            {/* Mobile Login Button */}
+            <div className="pt-4 mt-4 border-t border-gray-700">
+              <Link
+                href="/admin/login"
+                className="flex items-center justify-center space-x-2 w-full px-4 py-3 rounded-lg text-base font-medium bg-accent-500 text-primary-900 hover:bg-accent-400 transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <LogIn className="h-5 w-5" />
+                <span>Login</span>
+              </Link>
             </div>
           </div>
         </div>

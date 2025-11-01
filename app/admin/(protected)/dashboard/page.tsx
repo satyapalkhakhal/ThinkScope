@@ -91,6 +91,12 @@ export default function AdminDashboard() {
       color: 'bg-blue-500 hover:bg-blue-600',
     },
     {
+      name: 'Manage Authors',
+      href: '/admin/dashboard/authors',
+      icon: '👥',
+      color: 'bg-green-500 hover:bg-green-600',
+    },
+    {
       name: 'View Categories',
       href: '/admin/dashboard/categories',
       icon: '🗂️',
@@ -133,7 +139,7 @@ export default function AdminDashboard() {
       {/* Quick Actions */}
       <div>
         <h2 className="text-xl font-bold text-white mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {quickActions.map((action) => (
             <Link
               key={action.name}

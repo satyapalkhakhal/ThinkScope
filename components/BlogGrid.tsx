@@ -14,6 +14,7 @@ interface Article {
   category: string;
   slug: string;
   categoryId?: string;
+  author?: string;
 }
 
 interface BlogGridProps {
@@ -90,7 +91,7 @@ function BlogCard({ article, index }: BlogCardProps) {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 text-xs text-gray-500">
               <User className="h-3 w-3" />
-              <span>ThinkScope Team</span>
+              <span>{article.author || 'ThinkScope Team'}</span>
             </div>
             <span className="text-accent-500 font-semibold text-sm group-hover:text-accent-400 transition-colors">
               Read More →

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import BlogGrid from '@/components/BlogGrid';
-import { articleService, categoryService } from '@/lib/services';
+import { articleService, categoryService, authorService } from '@/lib/services';
 
 export const metadata: Metadata = {
   title: 'Blog | ThinkScope - Latest Articles and Insights',
@@ -29,6 +29,9 @@ export default async function BlogPage() {
   // Fetch all categories for the filter buttons
   const { data: categories, error: categoriesError } = await categoryService.getAll();
 
+  // Fetch all authors
+  const { data: authors } = await authorService.getAll(false); // Get all authors including inactive
+
   if (articlesError || !articles) {
     return (
       <div className="min-h-screen pt-16">
@@ -44,9 +47,15 @@ export default async function BlogPage() {
     (categories || []).map(cat => [cat.id, { name: cat.name, slug: cat.slug }])
   );
 
+  // Create a map of author IDs to names
+  const authorMap = new Map(
+    (authors || []).map(author => [author.id, author.name])
+  );
+
   // Transform articles for BlogGrid component
   const allArticles = articles.map(article => {
     const category = categoryMap.get(article.category_id);
+    const authorName = article.author_id ? authorMap.get(article.author_id) : undefined;
     return {
       id: article.id,
       title: article.title,
@@ -57,6 +66,7 @@ export default async function BlogPage() {
       category: category?.name || 'Uncategorized',
       categoryId: category?.slug || '',
       slug: article.slug,
+      author: authorName,
     };
   });
 

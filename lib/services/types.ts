@@ -42,8 +42,23 @@ export interface Author {
   email: string;
   bio: string | null;
   avatar_url: string | null;
+  role: 'admin' | 'editor' | 'writer' | 'contributor';
+  is_active: boolean;
   created_at: string;
   updated_at: string;
+}
+
+export interface AuthorCategoryAssignment {
+  id: number;
+  author_id: number;
+  category_id: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AuthorWithCategories extends Author {
+  assigned_categories?: Category[];
+  category_ids?: number[];
 }
 
 export interface Tag {
